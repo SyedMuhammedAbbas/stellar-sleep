@@ -23,7 +23,7 @@ export default function Quiz() {
   // const current = questions[currentQuestion];
 
   const dispatch = useDispatch();
-  const { questions, currentQuestion, responses } = useSelector(
+  const { questions, currentQuestion, multipleChoiceResponses } = useSelector(
     (state) => state.quiz
   );
   const current = useSelector(selectQuestion);
@@ -68,6 +68,8 @@ export default function Quiz() {
   }
   // console.log(current, "this is current question");
   // console.log(responses, "Answers array");
+  console.log(multipleChoiceResponses, "mcqs");
+
   return (
     <div className="bg-transparent p-4 w-[400px]">
       {current.inputType !== ("static" || "dynamic") && (
@@ -102,15 +104,16 @@ export default function Quiz() {
               <CheckBoxQuiz
                 question={current.question}
                 choices={current.choices}
+                id={current.id}
               />
             );
           case "static":
             if (current.typeStatic === "behavioral therapy static page") {
               return <BehavioraltherapyInfo />;
             } else if (current.typeStatic === "Quality sleep") {
-              return <Template one={""} />;
+              return <QualitySleepGraph />;
             } else if (current.typeStatic === "psychology-based approach") {
-              return <Template one={""} />;
+              return <PsychologyBasedApproach />;
             }
           default:
             return null;

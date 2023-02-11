@@ -23,12 +23,12 @@ export default function MultipleChoiceQuiz({ question, choices, id }) {
   function handleOptionClick(option, id) {
     setSelectedChoice(option);
     setSelectedOption([id, option]);
-    dispatch(submitMultipleChoiceAnswer(selectedOption));
+    // dispatch(submitMultipleChoiceAnswer(selectedOption));
   }
 
   function handleSubmitResponse() {
     dispatch(submitMultipleChoiceAnswer(selectedOption));
-    setSelectedOption("");
+    // setSelectedOption("");
     dispatch(moveToNextQuestion());
   }
 

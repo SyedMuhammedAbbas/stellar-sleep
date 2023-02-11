@@ -90,6 +90,7 @@ export default function BehavioraltherapyInfo() {
               </div>
             </div>
           </div>
+
           <div className="w-full">
             <button
               onClick={() => handleNextPage()}
