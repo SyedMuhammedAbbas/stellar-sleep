@@ -1,6 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import {
+  moveToNextQuestion,
+  moveTopreviousQuestion,
+  submitMultipleChoiceAnswer,
+  selectQuestion,
+  selectAnswer,
+} from "@/reducers/QuizSlice";
 
-export default function CheckBoxQuiz({ question, choices }) {
+export default function CheckBoxQuiz({ question, choices, id }) {
   const [answers, setAnswers] = useState({});
 
   const handleChange = (event, question) => {
@@ -17,6 +25,23 @@ export default function CheckBoxQuiz({ question, choices }) {
     });
   };
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(submitMultipleChoiceAnswer());
+  }, []);
+
+  function handleOptionClick(option, id) {
+    setSelectedChoice(option);
+    setSelectedOption([id, option]);
+    // dispatch(submitMultipleChoiceAnswer(selectedOption));
+  }
+
+  function handleSubmitResponse() {
+    dispatch(submitMultipleChoiceAnswer(selectedOption));
+    // setSelectedOption("");
+    dispatch(moveToNextQuestion());
+  }
   return (
     <>
       {/* {current.type === "question" && ( */}
@@ -36,15 +61,27 @@ export default function CheckBoxQuiz({ question, choices }) {
             //     {option}
             //   </button>
             // </div>
-            <label key={option}>
+            <label
+              key={option}
+              className={`w-full px-5 mb-2 flex items-center hover:scale-[1.02] bg-[#37533C] transition-all h-[60px] rounded-[10px] text-[20px] text-[#ffffff]`}
+            >
               <input
                 type="checkbox"
                 value={option}
+                className="mr-2 w-4 h-4"
                 onChange={(event) => handleChange(event, question)}
               />
               {option}
             </label>
           ))}
+        </div>
+        <div className="w-[350px]">
+          <button
+            onClick={() => handleSubmitResponse()}
+            className="bg-[#DE8F6E] w-full h-[70px] text-white text-[20px] text-center rounded-[10px] my-[20px]"
+          >
+            Next
+          </button>
         </div>
       </div>
       {/* )} */}

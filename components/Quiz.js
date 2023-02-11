@@ -14,6 +14,7 @@ import BehavioraltherapyInfo from "./static/BehavioraltherapyInfo";
 import QualitySleepGraph from "./static/QualitySleepGraph";
 import PsychologyBasedApproach from "./static/PsychologyBasedApproach";
 import Template from "./common/Template";
+import InsomniaSeverityIndex from "./dynamic/InsomniaSeverityIndex";
 
 export default function Quiz() {
   // const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -72,8 +73,12 @@ export default function Quiz() {
 
   return (
     <div className="bg-transparent p-4 w-[400px]">
-      {current.inputType !== ("static" || "dynamic") && (
-        <div className="flex gap-5 justify-center py-[20px]">
+      {current.inputType === "static" ? (
+        ""
+      ) : current.inputType === "dynamic" ? (
+        ""
+      ) : (
+        <div className="flex gap-8 pr-16 justify-center py-[20px]">
           {currentQuestion > 0 && (
             <button
               type="button"
@@ -114,6 +119,10 @@ export default function Quiz() {
               return <QualitySleepGraph />;
             } else if (current.typeStatic === "psychology-based approach") {
               return <PsychologyBasedApproach />;
+            }
+          case "dynamic":
+            if (current.typeDynamic === "ISI") {
+              return <InsomniaSeverityIndex />;
             }
           default:
             return null;
