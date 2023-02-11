@@ -1,0 +1,66 @@
+import React, { useState, useEffect } from "react";
+// import ProgressBar from "./ProgressBar";
+// import { AiOutlineArrowLeft } from "react-icons/ai";
+import {
+  moveToNextQuestion,
+  moveTopreviousQuestion,
+  submitMultipleChoiceAnswer,
+  selectQuestion,
+  selectAnswer,
+} from "@/reducers/QuizSlice";
+import { useDispatch } from "react-redux";
+
+export default function MultipleChoiceQuiz({ question, choices, id }) {
+  const [selectedOption, setSelectedOption] = useState([]);
+  const [selectChoice, setSelectedChoice] = useState();
+  const dispatch = useDispatch();
+  // console.log(choices, "hello choices");
+
+  useEffect(() => {
+    dispatch(submitMultipleChoiceAnswer());
+  }, []);
+
+  function handleOptionClick(option, id) {
+    setSelectedChoice(option);
+    setSelectedOption([id, option]);
+    dispatch(submitMultipleChoiceAnswer(selectedOption));
+  }
+
+  function handleSubmitResponse() {
+    dispatch(submitMultipleChoiceAnswer(selectedOption));
+    setSelectedOption("");
+    dispatch(moveToNextQuestion());
+  }
+
+  return (
+    <>
+      {/* {current.type === "question" && ( */}
+      <div className="w-[350px]">
+        <h1 className="text-[25px] text-[#ffffff] py-4">{question}</h1>
+        <div className="grid gap-2">
+          {choices.map((option) => (
+            <div key={option} className="mb-2">
+              <button
+                onClick={() => handleOptionClick(option, id)}
+                // value={option}
+                className={`w-full text-center hover:scale-[1.02] transition-all h-[65px] rounded-[10px] px-7 text-[17px] text-[#ffffff]
+                ${option === selectChoice ? "bg-[#769E7D]" : "bg-[#37533C]"}`}
+              >
+                {option}
+              </button>
+            </div>
+          ))}
+        </div>
+        <div className="w-[350px]">
+          <button
+            onClick={() => handleSubmitResponse()}
+            className="bg-[#DE8F6E] w-full h-[70px] text-white text-[20px] text-center rounded-[10px] my-[20px]"
+          >
+            Next
+          </button>
+        </div>
+      </div>
+      {/* )} */}
+    </>
+  );
+}
