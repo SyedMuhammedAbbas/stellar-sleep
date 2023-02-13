@@ -20,17 +20,20 @@ export default function MultipleChoiceQuiz({ question, choices, id }) {
     dispatch(submitMultipleChoiceAnswer());
   }, []);
 
-  function handleOptionClick(option, id) {
+  function handleOptionClick(index, option, id) {
     setSelectedChoice(option);
-    setSelectedOption([id, option]);
+    setSelectedOption([id, option, index]);
     // dispatch(submitMultipleChoiceAnswer(selectedOption));
   }
 
   function handleSubmitResponse() {
     dispatch(submitMultipleChoiceAnswer(selectedOption));
-    // setSelectedOption("");
-    dispatch(moveToNextQuestion());
+    setSelectedOption([""]);
+    if (!selectedOption[""]) {
+      dispatch(moveToNextQuestion());
+    }
   }
+  console.log(selectedOption, "mcqs select");
 
   return (
     <>
@@ -38,13 +41,15 @@ export default function MultipleChoiceQuiz({ question, choices, id }) {
       <div className="w-[350px]">
         <h1 className="text-[25px] text-[#ffffff] py-4">{question}</h1>
         <div className="grid gap-2">
-          {choices.map((option) => (
-            <div key={option} className="mb-2">
+          {choices.map((option, index) => (
+            <div key={index} className="mb-2">
               <button
-                onClick={() => handleOptionClick(option, id)}
+                onClick={() => handleOptionClick(index, option, id)}
                 // value={option}
                 className={`w-full text-center hover:scale-[1.02] transition-all h-[65px] rounded-[10px] px-7 text-[17px] text-[#ffffff]
-                ${option === selectChoice ? "bg-[#769E7D]" : "bg-[#37533C]"}`}
+                ${
+                  option === selectedOption[1] ? "bg-[#769E7D]" : "bg-[#37533C]"
+                }`}
               >
                 {option}
               </button>

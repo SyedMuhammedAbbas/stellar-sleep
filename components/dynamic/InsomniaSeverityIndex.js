@@ -13,7 +13,6 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 // import logo from "@/images/logo.png";
 
 export default function InsomniaSeverityIndex() {
-  const { multipleChoiceResponses } = useSelector((state) => state.quiz);
   const [isi_1, setISI_1] = useState();
   const [isi_2, setISI_2] = useState();
   const [isi_3, setISI_3] = useState();
@@ -21,6 +20,21 @@ export default function InsomniaSeverityIndex() {
   const [isi_5, setISI_5] = useState();
   const [isi_6, setISI_6] = useState();
   const [isi_7, setISI_7] = useState();
+  const { multipleChoiceResponses } = useSelector((state) => state.quiz);
+
+  // const [temp2, setTemp2] = useState(0);
+  // multipleChoiceResponses.map((option) => {if(option[4]){setISI_1(option[4])}});
+  const val = [4, 5, 6, 7, 8, 9, 10];
+  let temp2 = 0;
+  let result = val.map((i) => {
+    let temp = multipleChoiceResponses[i];
+    // setISI_1(temp[2]);
+    let temp1 = temp[2];
+    temp2 = temp2 + temp1;
+    if (i === 10) {
+      return temp2;
+    }
+  });
 
   console.log(multipleChoiceResponses, "mcqs in isi");
   // Add up the ISI score:
@@ -100,13 +114,20 @@ export default function InsomniaSeverityIndex() {
               Based on what you've told us, your insomnia severity index* is
             </div>
             <div className="text-[45px] font-bold py-7 text-center text-[#7B91DD]">
-              7
+              {result}
             </div>
             <div className="text-[20px] text-[#ffffff]">
               This means that you have
             </div>
             <div className="text-[50px] font-bold text-center text-[#6FCF97]">
-              No clinically significant insomnia
+              {/* No clinically significant insomnia */}
+              {result <= 7
+                ? "No clinically significant insomnia"
+                : result <= 14
+                ? "Subthreshold insomnia"
+                : result <= 21
+                ? "Moderate clinical insomnia"
+                : "Severe clinical insomnia"}
             </div>
             <div className="text-[14px] text-[#ffffff]">
               * Insomnia Severity Index (ISI) is the most widely recognized and
