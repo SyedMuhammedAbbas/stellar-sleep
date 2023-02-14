@@ -17,11 +17,6 @@ export default function BehavioraltherapyInfo() {
   const { questions, currentQuestion } = useSelector((state) => state.quiz);
   const current = useSelector(selectQuestion);
 
-  useEffect(() => {
-    dispatch(moveTopreviousQuestion());
-    dispatch(moveToNextQuestion());
-  }, []);
-
   function handlePreviousPage() {
     dispatch(moveTopreviousQuestion());
   }
@@ -46,6 +41,7 @@ export default function BehavioraltherapyInfo() {
             <div className="  flex justify-center">
               <Image
                 src={logo}
+                alt="logo"
                 width="150"
                 height="120"
                 className="w-[160px] h-[32px]"
@@ -64,6 +60,7 @@ export default function BehavioraltherapyInfo() {
               <div className="w-[140px]">
                 <Image
                   src={aasm}
+                  alt="aasm"
                   width={200}
                   height={200}
                   className="w-[140px] object-contain"
@@ -79,6 +76,7 @@ export default function BehavioraltherapyInfo() {
               <div>
                 <Image
                   src={acp}
+                  alt="acp"
                   width={200}
                   height={200}
                   className="w-[140px] object-contain"

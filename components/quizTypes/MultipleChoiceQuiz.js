@@ -16,10 +16,6 @@ export default function MultipleChoiceQuiz({ question, choices, id }) {
   const dispatch = useDispatch();
   // console.log(choices, "hello choices");
 
-  useEffect(() => {
-    dispatch(submitMultipleChoiceAnswer());
-  }, []);
-
   function handleOptionClick(index, option, id) {
     setSelectedChoice(option);
     setSelectedOption([id, option, index]);
@@ -37,7 +33,6 @@ export default function MultipleChoiceQuiz({ question, choices, id }) {
 
   return (
     <>
-      {/* {current.type === "question" && ( */}
       <div className="w-[350px]">
         <h1 className="text-[25px] text-[#ffffff] py-4">{question}</h1>
         <div className="grid gap-2">
@@ -45,7 +40,6 @@ export default function MultipleChoiceQuiz({ question, choices, id }) {
             <div key={index} className="mb-2">
               <button
                 onClick={() => handleOptionClick(index, option, id)}
-                // value={option}
                 className={`w-full text-center hover:scale-[1.02] transition-all h-[65px] rounded-[10px] px-7 text-[17px] text-[#ffffff]
                 ${
                   option === selectedOption[1] ? "bg-[#769E7D]" : "bg-[#37533C]"
@@ -65,7 +59,6 @@ export default function MultipleChoiceQuiz({ question, choices, id }) {
           </button>
         </div>
       </div>
-      {/* )} */}
     </>
   );
 }

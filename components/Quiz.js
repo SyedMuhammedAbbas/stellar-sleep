@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import ProgressBar from "./ProgressBar";
+// import ProgressBar from "./ProgressBar";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux/es/exports";
 import {
   moveToNextQuestion,
   moveTopreviousQuestion,
-  submitAnswer,
   selectQuestion,
 } from "@/reducers/QuizSlice";
 import MultipleChoiceQuiz from "./quizTypes/MultipleChoiceQuiz";
@@ -13,7 +12,7 @@ import CheckBoxQuiz from "./quizTypes/CheckBoxQuiz";
 import BehavioraltherapyInfo from "./static/BehavioraltherapyInfo";
 import QualitySleepGraph from "./static/QualitySleepGraph";
 import PsychologyBasedApproach from "./static/PsychologyBasedApproach";
-import Template from "./common/Template";
+// import Template from "./common/Template";
 import InsomniaSeverityIndex from "./dynamic/InsomniaSeverityIndex";
 
 export default function Quiz() {
@@ -29,18 +28,13 @@ export default function Quiz() {
   );
   const current = useSelector(selectQuestion);
 
-  useEffect(() => {
-    dispatch(moveTopreviousQuestion());
-    dispatch(moveToNextQuestion());
-  }, []);
-
   function handlePreviousPage() {
     dispatch(moveTopreviousQuestion());
   }
 
-  function handleNextPage() {
-    dispatch(moveToNextQuestion());
-  }
+  // function handleNextPage() {
+  //   dispatch(moveToNextQuestion());
+  // }
   // console.log(current, "this is current question");
   // console.log(responses, "Answers array");
   console.log(multipleChoiceResponses, "mcqs");

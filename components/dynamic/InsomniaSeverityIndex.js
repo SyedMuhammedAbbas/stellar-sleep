@@ -13,22 +13,12 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 // import logo from "@/images/logo.png";
 
 export default function InsomniaSeverityIndex() {
-  const [isi_1, setISI_1] = useState();
-  const [isi_2, setISI_2] = useState();
-  const [isi_3, setISI_3] = useState();
-  const [isi_4, setISI_4] = useState();
-  const [isi_5, setISI_5] = useState();
-  const [isi_6, setISI_6] = useState();
-  const [isi_7, setISI_7] = useState();
   const { multipleChoiceResponses } = useSelector((state) => state.quiz);
 
-  // const [temp2, setTemp2] = useState(0);
-  // multipleChoiceResponses.map((option) => {if(option[4]){setISI_1(option[4])}});
   const val = [4, 5, 6, 7, 8, 9, 10];
   let temp2 = 0;
   let result = val.map((i) => {
     let temp = multipleChoiceResponses[i];
-    // setISI_1(temp[2]);
     let temp1 = temp[2];
     temp2 = temp2 + temp1;
     if (i === 10) {
@@ -37,47 +27,8 @@ export default function InsomniaSeverityIndex() {
   });
 
   console.log(multipleChoiceResponses, "mcqs in isi");
-  // Add up the ISI score:
-  // function result({ isi_1, isi_2, isi_3, isi_4, isi_5, isi_6, isi_7 }) {
-  //   return (
-  //     parseInt(isi_1) +
-  //     parseInt(isi_2) +
-  //     parseInt(isi_3) +
-  //     parseInt(isi_4) +
-  //     parseInt(isi_5) +
-  //     parseInt(isi_6) +
-  //     parseInt(isi_7)
-  //   );
-  // }
-  // ISI score label:
-  // function result({ isi_1, isi_2, isi_3, isi_4, isi_5, isi_6, isi_7 }) {
-  //   const score =
-  //     parseInt(isi_1) +
-  //     parseInt(isi_2) +
-  //     parseInt(isi_3) +
-  //     parseInt(isi_4) +
-  //     parseInt(isi_5) +
-  //     parseInt(isi_6) +
-  //     parseInt(isi_7);
-  //   if (score <= 7) {
-  //     return "No clinically significant insomnia";
-  //   } else if (score <= 14) {
-  //     return "Subthreshold insomnia";
-  //   } else if (score <= 21) {
-  //     return "Moderate clinical insomnia";
-  //   } else {
-  //     return "Severe clinical insomnia";
-  //   }
-  // }
 
   const dispatch = useDispatch();
-  // const { questions, currentQuestion } = useSelector((state) => state.quiz);
-  // const current = useSelector(selectQuestion);
-
-  useEffect(() => {
-    dispatch(moveTopreviousQuestion());
-    dispatch(moveToNextQuestion());
-  }, []);
 
   function handlePreviousPage() {
     dispatch(moveTopreviousQuestion());
@@ -93,7 +44,6 @@ export default function InsomniaSeverityIndex() {
           <div className="flex ">
             <div className="w-[25%]">
               <button
-                // type="button"
                 onClick={() => handlePreviousPage()}
                 className=" text-white text-[30px]"
               >
@@ -103,6 +53,7 @@ export default function InsomniaSeverityIndex() {
             <div className="  flex justify-center">
               <Image
                 src={logo}
+                alt="logo"
                 width="150"
                 height="120"
                 className="w-[160px] h-[32px]"
@@ -120,7 +71,6 @@ export default function InsomniaSeverityIndex() {
               This means that you have
             </div>
             <div className="text-[50px] font-bold text-center text-[#6FCF97]">
-              {/* No clinically significant insomnia */}
               {result <= 7
                 ? "No clinically significant insomnia"
                 : result <= 14

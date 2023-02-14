@@ -1,7 +1,6 @@
 import Image from "next/image";
 import logo from "@/images/logo.png";
 import Link from "next/link";
-import questions from "./QuizQuestions";
 
 export default function Landing() {
   return (
@@ -11,6 +10,7 @@ export default function Landing() {
           <div className="pb-10 flex justify-center">
             <Image
               src={logo}
+              alt="logo"
               width="150"
               height="120"
               className="w-[160px] h-[32px]"

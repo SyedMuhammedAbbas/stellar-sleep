@@ -1,4 +1,3 @@
-import questions from "@/components/QuizQuestions";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {

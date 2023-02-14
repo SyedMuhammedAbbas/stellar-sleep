@@ -18,11 +18,6 @@ export default function PsychologyBasedApproach() {
   const { questions, currentQuestion } = useSelector((state) => state.quiz);
   const current = useSelector(selectQuestion);
 
-  useEffect(() => {
-    dispatch(moveTopreviousQuestion());
-    dispatch(moveToNextQuestion());
-  }, []);
-
   function handlePreviousPage() {
     dispatch(moveTopreviousQuestion());
   }
@@ -48,6 +43,7 @@ export default function PsychologyBasedApproach() {
             <div className="  flex justify-center">
               <Image
                 src={logo}
+                alt="logo"
                 width="150"
                 height="120"
                 className="w-[160px] h-[32px]"
@@ -57,6 +53,7 @@ export default function PsychologyBasedApproach() {
           <div>
             <Image
               src={locationSVG}
+              alt="location point"
               width={50}
               height={50}
               className="w-[20px] flex justify-center items-center"

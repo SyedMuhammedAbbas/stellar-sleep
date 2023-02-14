@@ -16,11 +16,6 @@ export default function QualitySleepGraph() {
   const { questions, currentQuestion } = useSelector((state) => state.quiz);
   const current = useSelector(selectQuestion);
 
-  useEffect(() => {
-    dispatch(moveTopreviousQuestion());
-    dispatch(moveToNextQuestion());
-  }, []);
-
   function handlePreviousPage() {
     dispatch(moveTopreviousQuestion());
   }
@@ -45,6 +40,7 @@ export default function QualitySleepGraph() {
             <div className="  flex justify-center">
               <Image
                 src={logo}
+                alt="logo"
                 width="150"
                 height="120"
                 className="w-[160px] h-[32px]"
@@ -59,6 +55,7 @@ export default function QualitySleepGraph() {
             <div>
               <Image
                 src={QualitySleepGraphImage}
+                alt="quality sleep graph"
                 width={300}
                 height={300}
                 className="w-[330px] "

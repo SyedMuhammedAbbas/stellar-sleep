@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-// import ProgressBar from "./ProgressBar";
-// import { AiOutlineArrowLeft } from "react-icons/ai";
 
 export default function InputFieldQuiz() {
   return (

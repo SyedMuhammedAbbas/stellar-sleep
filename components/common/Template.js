@@ -20,6 +20,7 @@ export default function Template({ one }) {
             <div className="  flex justify-center">
               <Image
                 src={logo}
+                alt="logo"
                 width="150"
                 height="120"
                 className="w-[160px] h-[32px]"
