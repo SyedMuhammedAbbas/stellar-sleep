@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-};
+// const nextConfig = {
+//   reactStrictMode: true,
+// };
 
 module.exports = {
   images: {
@@ -16,5 +16,15 @@ module.exports = {
   },
   experimental: {
     appDir: true,
+  },
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        fs: false,
+        module: false,
+      };
+    }
+
+    return config;
   },
 };
