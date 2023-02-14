@@ -9,20 +9,29 @@ import {
 } from "@/reducers/QuizSlice";
 
 export default function CheckBoxQuiz({ question, choices, id }) {
-  const [answers, setAnswers] = useState({});
+  // const [answers, setAnswers] = useState({});
 
-  const handleChange = (event, question) => {
-    const value = event.target.value;
-    setAnswers((prevAnswers) => {
-      return {
-        ...prevAnswers,
-        [question]: prevAnswers[question]
-          ? prevAnswers[question].includes(value)
-            ? prevAnswers[question].filter((answer) => answer !== value)
-            : [...prevAnswers[question], value]
-          : [value],
-      };
-    });
+  // const handleChange = (event, question) => {
+  //   const value = event.target.value;
+  //   setAnswers((prevAnswers) => {
+  //     return {
+  //       ...prevAnswers,
+  //       [question]: prevAnswers[question]
+  //         ? prevAnswers[question].includes(value)
+  //           ? prevAnswers[question].filter((answer) => answer !== value)
+  //           : [...prevAnswers[question], value]
+  //         : [value],
+  //     };
+  //   });
+  // };
+  const [selectedOptions, setSelectedOptions] = useState([]);
+
+  const handleOptionSelect = (option) => {
+    if (selectedOptions.includes(option)) {
+      setSelectedOptions(selectedOptions.filter((o) => o !== option));
+    } else {
+      setSelectedOptions([...selectedOptions, option]);
+    }
   };
 
   const dispatch = useDispatch();
@@ -31,17 +40,18 @@ export default function CheckBoxQuiz({ question, choices, id }) {
     dispatch(submitMultipleChoiceAnswer());
   }, []);
 
-  function handleOptionClick(option, id) {
-    setSelectedChoice(option);
-    setSelectedOption([id, option]);
-    // dispatch(submitMultipleChoiceAnswer(selectedOption));
-  }
+  // function handleOptionClick(option, id) {
+  //   setSelectedChoice(option);
+  //   setSelectedOption([id, option]);
+  //   // dispatch(submitMultipleChoiceAnswer(selectedOption));
+  // }
 
   function handleSubmitResponse() {
-    dispatch(submitMultipleChoiceAnswer(selectedOption));
+    dispatch(submitMultipleChoiceAnswer(selectedOptions));
     // setSelectedOption("");
     dispatch(moveToNextQuestion());
   }
+
   return (
     <>
       {/* {current.type === "question" && ( */}
@@ -63,13 +73,17 @@ export default function CheckBoxQuiz({ question, choices, id }) {
             // </div>
             <label
               key={option}
-              className={`w-full px-5 mb-2 flex items-center hover:scale-[1.02] bg-[#37533C] transition-all h-[60px] rounded-[10px] text-[20px] text-[#ffffff]`}
+              className={`w-full px-5 mb-2 flex items-center hover:scale-[1.02] ${
+                selectedOptions.includes(option)
+                  ? "bg-[#769E7D]"
+                  : "bg-[#37533C]"
+              } transition-all h-[60px] rounded-[10px] text-[20px] text-[#ffffff]`}
             >
               <input
                 type="checkbox"
                 value={option}
                 className="mr-2 w-4 h-4"
-                onChange={(event) => handleChange(event, question)}
+                onChange={handleOptionSelect(option)}
               />
               {option}
             </label>

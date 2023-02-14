@@ -29,32 +29,6 @@ export default function Quiz() {
   );
   const current = useSelector(selectQuestion);
 
-  //   const handleSubmit = (event) => {
-  //     event.preventDefault();
-  //     if (current.type === "question") {
-  //       setAnswers([...answers, event.target.answer.value]);
-  //       setCurrentQuestion(currentQuestion + 1);
-  //     } else {
-  //       setShowInfo(true);
-  //     }
-  //   };
-  // const handleOptionClick = (option) => {
-  //   setSelectedOption(option);
-  // };
-  // const handleBack = () => {
-  //   setCurrentQuestion(currentQuestion - 1);
-  //   setSelectedOption(null);
-  // };
-
-  // const handleNextClick = () => {
-  //   setCurrentQuestion(currentQuestion + 1);
-  //   setSelectedOption(null);
-  // };
-
-  // if (currentQuestion >= questions.length) {
-  //   return <h1 className="text-xl font-bold">Quiz Completed</h1>;
-  // }
-
   useEffect(() => {
     dispatch(moveTopreviousQuestion());
     dispatch(moveToNextQuestion());

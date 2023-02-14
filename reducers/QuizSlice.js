@@ -14,6 +14,7 @@ const initialState = {
       ],
       typeStatic: "",
       typeDynamic: "",
+      output: [{ goal: "" }],
     },
     {
       id: 2,
